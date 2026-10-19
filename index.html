@@ -272,7 +272,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-
         <div class="eyebrow">Contact</div>
         <h2>Questions about an app, or an IT project?</h2>
         <p>Send a note and you'll get a reply from David directly.</p>
-        <div class="alt"><span class="eyebrow">Or email</span><span>hello@bacstech.io</span></div>
+        <div class="alt"><span class="eyebrow">Or email</span><span>hello at bacstech dot io</span></div>
       </div>
       <form id="contact-form" novalidate>
         <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
@@ -289,7 +289,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-
 
 <footer>
   <div class="wrap">
-    <div class="mail"><span>Apps or consulting:</span><code id="mail">hello@bacstech.io</code><button class="copy" id="copy" type="button">Copy</button><span id="copied" aria-live="polite"></span></div>
+    <div class="mail"><span>Apps or consulting:</span><code id="mail">hello at bacstech dot io</code><button class="copy" id="copy" type="button">Copy</button><span id="copied" aria-live="polite"></span></div>
     <span>© 2026 BACS Tech, Inc. · <a href="https://www.linkedin.com/company/bacs-technology" target="_blank" rel="noopener">LinkedIn</a></span>
   </div>
 </footer>
@@ -307,20 +307,20 @@ document.getElementById('contact-form').addEventListener('submit', function(e){
   st.className='status';
   var name=f.name.value.trim(), email=f.email.value.trim(), msg=f.message.value.trim();
   if(!name||!msg||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){st.className='status err';st.textContent='Add your name, a valid email and a message.';return;}
-  if(!GOOGLE_FORM.action){st.className='status err';st.textContent='Form not connected yet. Email hello@bacstech.io instead.';return;}
+  if(!GOOGLE_FORM.action){st.className='status err';st.textContent='Form not connected yet. Email hello at bacstech dot io instead.';return;}
   var body=new URLSearchParams();
   var vals = { name: name, email: email, company: f.company.value.trim(), message: '[' + f.topic.value + '] ' + msg };
   Object.keys(GOOGLE_FORM.fields).forEach(function(k){body.append(GOOGLE_FORM.fields[k], vals[k]);});
   btn.disabled=true; st.textContent='Sending…';
   fetch(GOOGLE_FORM.action,{method:'POST',mode:'no-cors',body:body})
     .then(function(){st.className='status ok';st.textContent='Sent. Thanks, you’ll hear back soon.';f.reset();})
-    .catch(function(){st.className='status err';st.textContent='Could not send. Email hello@bacstech.io instead.';})
+    .catch(function(){st.className='status err';st.textContent='Could not send. Email hello at bacstech dot io instead.';})
     .finally(function(){btn.disabled=false;});
 });
 document.getElementById('copy').addEventListener('click', function(){
   var out=document.getElementById('copied');
   function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);out.textContent='Selected';}
-  try{navigator.clipboard.writeText('hello@bacstech.io').then(function(){out.textContent='Copied';},sel);}catch(e){sel();}
+  try{navigator.clipboard.writeText(['hello','bacstech.io'].join(String.fromCharCode(64))).then(function(){out.textContent='Copied';},sel);}catch(e){sel();}
 });
 </script>
 </body>
